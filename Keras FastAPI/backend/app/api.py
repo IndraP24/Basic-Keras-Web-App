@@ -91,7 +91,7 @@ async def predict_image(file: UploadFile = File(...)):
             data["success"] = True
 
         return {
-            "data": data,
+            "success": data["success"],
             "result": data["predictions"][0]
         }
 
