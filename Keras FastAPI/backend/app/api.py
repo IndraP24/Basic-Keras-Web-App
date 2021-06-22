@@ -15,7 +15,8 @@ import io
 import sys
 
 
-app = FastAPI(title="Keras ImageNet Web App")
+app = FastAPI(title="Keras ImageNet Web App", 
+              description="A simple web application that accepts an image classifies the image made according to the ResNet50 model pre-trained for the ImageNet dataset!")
 model = None
 
 # Define the Response
