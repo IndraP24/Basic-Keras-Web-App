@@ -1,8 +1,7 @@
 # import the necessary packages
-import tensorflow as tf
-from keras.applications import ResNet50
-from keras.preprocessing.image import img_to_array
-from keras.applications import imagenet_utils
+from tensorflow.keras.applications import ResNet50
+from tensorflow.keras.preprocessing.image import img_to_array
+from tensorflow.keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 from flask import Flask, request, jsonify
