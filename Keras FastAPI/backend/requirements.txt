@@ -1,4 +1,4 @@
-tensdorflow
+tensorflow
 numpy
 fastapi
 uvicorn
