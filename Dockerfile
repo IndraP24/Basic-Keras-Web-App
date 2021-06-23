@@ -1,6 +1,6 @@
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
 
-COPY ./backend /app
+COPY api.py /app
 COPY requirements.txt /app
 
 RUN pip install --upgrade pip
