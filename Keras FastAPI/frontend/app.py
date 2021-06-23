@@ -2,7 +2,6 @@ import streamlit as st
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 import requests
 from PIL import Image
-import io
 
 st.title('ResNet50 Image Classification on ImageNet')
 
