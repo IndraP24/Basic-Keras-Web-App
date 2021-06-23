@@ -14,13 +14,13 @@ services:
       depends_on:
         - backend
       ports:
-          - 8501:8501
+        - 8501:8501
+      depends_on: 
+        - backend
       networks:
         - deploy_network
       container_name: frontend
   
-  networks:
-    deploy_network:
-      driver: bridge
-  
-  
+networks:
+  deploy_network:
+    driver: bridge
