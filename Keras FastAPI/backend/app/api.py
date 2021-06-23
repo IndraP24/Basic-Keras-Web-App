@@ -9,8 +9,6 @@ from PIL import Image
 import numpy as np
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from pydantic import BaseModel
-from typing import List
 import io
 import sys
 
@@ -18,13 +16,6 @@ import sys
 app = FastAPI(title="Keras ImageNet Web App", 
               description="A simple web application that accepts an image classifies the image made according to the ResNet50 model pre-trained for the ImageNet dataset!")
 model = None
-
-# Define the Response
-class Prediction(BaseModel):
-  filename: str
-  contenttype: str
-  prediction: List[float] = []
-  likely_class: int
 
 
 def load_model():
