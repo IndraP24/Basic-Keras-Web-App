@@ -9,14 +9,27 @@ from PIL import Image
 import numpy as np
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import io
 import sys
-import uvicorn
 
 
 app = FastAPI(title="Keras ImageNet Web App", 
               description="A simple web application that accepts an image classifies the image made according to the ResNet50 model pre-trained for the ImageNet dataset!")
 model = None
+
+
+origins = [
+    "http://172.23.0.3:8501"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 
 def load_model():
