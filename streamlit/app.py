@@ -3,7 +3,9 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 import requests
 from PIL import Image
 
-st.title('ResNet50 Image Classification on ImageNet')
+st.set_page_config(page_title='Image Classifier', layout='centered')
+
+st.title('Image Classification on ImageNet using ResNet50 architecture')
 
 # fastapi endpoint
 url = 'http://localhost:8000'
@@ -29,15 +31,16 @@ def process(image, server_url: str):
 
     return r
 
+col1, col2, col3, col4, col5, col6 = st.beta_columns(6)
 
-if st.button('Predict'):
+if col4.button('Predict', ):
 
     if image == None:
         st.write("Insert an image!")  # handle case with no image
     else:
         # File details
         st.subheader("File Details")
-        file_details = {"FileName": image.name,"FileType": image.type,"FileSize":image.size}
+        file_details = {"FileName": image.name, "FileType": image.type, "FileSize":image.size}
         st.write(file_details)
 
         # File content
