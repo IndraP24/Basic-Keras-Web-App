@@ -55,4 +55,7 @@ if st.button('Predict'):
         # processed_image = Image.open(io.BytesIO(res.content))
         # col2.image(processed_image, use_column_width=True)
         col2.header("Prediction")
-        col2.json(str(res.content.decode("utf-8")))
+        result = res.content.decode("utf-8")
+        col2.json(str(result))
+        Class = result.split('"')[7].capitalize()
+        col2.markdown("### Predicted Class: " + Class)
