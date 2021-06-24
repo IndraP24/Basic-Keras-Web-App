@@ -10,9 +10,9 @@ url = 'http://localhost:8000'
 endpoint = '/predict'
 
 # description and instructions
-st.write('''Upload an image and get the results of classification on it using the ResNet50 model architecture trained on the ImageNet dataset.
+st.markdown('''Upload an image and get the results of classification on it using the ResNet50 model architecture trained on the ImageNet dataset.
          This streamlit app uses a FastAPI service as backend.
-         Visit this URL at `:8000/docs` for FastAPI - Swagger UI documentation.''')
+         Visit this URL at [localhost:8000/docs](http://localhost:8000/docs) for FastAPI - Swagger UI documentation.''')
 
 # image upload widget
 image = st.file_uploader('Insert Image Here')
