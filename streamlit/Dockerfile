@@ -1,14 +1,16 @@
 FROM python:3.8-slim
 
-WORKDIR /app
+RUN mkdir /streamlit
 
-COPY requirements.txt .
+COPY requirements.txt /streamlit
+
+WORKDIR /streamlit
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY . /streamlit
 
 EXPOSE 8501
 
-CMD ["streamlit", "run", "app.py", "--server.enableCORS", "false", "--server.enableXsrfProtection", "false"]
+CMD ["streamlit", "run", "app.py"]

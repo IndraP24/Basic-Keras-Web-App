@@ -1,7 +1,6 @@
 # import the necessary packages
 import os
 os.environ["CUDA_VISIBLE_DEVICES"]="-1" 
-import tensorflow as tf
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications import imagenet_utils
@@ -9,7 +8,6 @@ from PIL import Image
 import numpy as np
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 import io
 import sys
 
@@ -18,22 +16,6 @@ app = FastAPI(title="Keras ImageNet Web App",
               description="A simple web application that accepts an image classifies the image made according to the ResNet50 model pre-trained for the ImageNet dataset!")
 model = None
 
-
-origins = [
-    "http://localhost:8501",
-    "localhost:8501",
-    "http://172.17.0.3:8501/",
-    "172.17.0.3:8501",
-    "http://103.215.225.119:8501"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
 
 
 def load_model():
@@ -67,18 +49,18 @@ async def read_root():
 
 
 @app.post("/predict", tags=["predict"])
-async def predict_image(file: UploadFile = File(...)):
+async def predict_image(file: bytes = File(...)):
     # initialize the data dictionary that will be returned from the view
     data = {"success": False}
 
     # Ensure that this is an image
-    if file.content_type.startswith('image/') is False:
-        raise HTTPException(status_code=400, detail=f'File \'{file.filename}\' is not an image.')
+    #if file.content_type.startswith('image/') is False:
+        #raise HTTPException(status_code=400, detail=f'File \'{file.filename}\' is not an image.')
 
     try:
         # Read image contents
-        img = await file.read()
-        image = Image.open(io.BytesIO(img))
+        #img = await file.read()
+        image = Image.open(io.BytesIO(file)).convert("RGB")
 
         # preprocess the image and prepare it for classification
         image = prepare_image(image, target=(224, 224))
