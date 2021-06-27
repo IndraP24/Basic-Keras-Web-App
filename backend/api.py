@@ -21,7 +21,10 @@ model = None
 
 origins = [
     "http://localhost:8501",
-    "localhost:8501"
+    "localhost:8501",
+    "http://172.17.0.3:8501/",
+    "172.17.0.3:8501",
+    "http://103.215.225.119:8501"
 ]
 
 app.add_middleware(
