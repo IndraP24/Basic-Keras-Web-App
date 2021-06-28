@@ -1,13 +1,13 @@
 # import the necessary packages
 import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1" 
+os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 from tensorflow.keras.applications import ResNet50
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, HTTPException
 import io
 import sys
 
