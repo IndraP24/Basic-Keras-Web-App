@@ -1,7 +1,5 @@
 tensorflow==2.4.2
 numpy
-pillow
 fastapi
-uvicorn
-gunicorn
+pillow
 python-multipart
