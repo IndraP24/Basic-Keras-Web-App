@@ -7,7 +7,7 @@ from tensorflow.keras.applications import imagenet_utils
 from PIL import Image
 import numpy as np
 
-from fastapi import FastAPI, File, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException
 import io
 import sys
 
@@ -49,13 +49,13 @@ async def read_root():
 
 
 @app.post("/predict", tags=["predict"])
-async def predict_image(file: bytes = File(...)):
+async def predict_image(file: UploadFile = File(...)):
     # initialize the data dictionary that will be returned from the view
     data = {"success": False}
 
     # Ensure that this is an image
-    #if file.content_type.startswith('image/') is False:
-        #raise HTTPException(status_code=400, detail=f'File \'{file.filename}\' is not an image.')
+    if file.content_type.startswith('image/') is False:
+        raise HTTPException(status_code=400, detail=f'File \'{file.filename}\' is not an image.')
 
     try:
         # Read image contents
