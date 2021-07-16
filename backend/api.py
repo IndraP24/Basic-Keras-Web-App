@@ -1,4 +1,5 @@
 # import the necessary packages
+from logging import debug
 import os
 os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 from tensorflow.keras.applications import ResNet50
@@ -8,6 +9,7 @@ from PIL import Image
 import numpy as np
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
+import uvicorn
 import io
 import sys
 
@@ -59,15 +61,14 @@ async def predict_image(file: UploadFile = File(...)):
 
     try:
         # Read image contents
-        #img = await file.read()
-        image = Image.open(io.BytesIO(file)).convert("RGB")
+        img = await file.read()
+        image = Image.open(io.BytesIO(img)).convert("RGB")
 
         # preprocess the image and prepare it for classification
         image = prepare_image(image, target=(224, 224))
 
         # classify the input image and then initialize the list
         # of predictions to return to the client
-        load_model()
         preds = model.predict(image)
         results = imagenet_utils.decode_predictions(preds)
 
@@ -90,3 +91,8 @@ async def predict_image(file: UploadFile = File(...)):
     except:
         e = sys.exc_info()[1]
         raise HTTPException(status_code=500, detail=str(e))
+
+
+if __name__ == "__main__":
+    load_model()
+    uvicorn.run(app, host="0.0.0.0", port=8000, debug=True)
